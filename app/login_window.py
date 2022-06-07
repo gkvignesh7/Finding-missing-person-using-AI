@@ -1,17 +1,13 @@
 import sys
 import requests
 import json
-
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QListView
 from PyQt5.QtWidgets import QMessageBox, QListWidget, QLabel, QLineEdit
-
 from app_window import AppWindow
-
-
 class LoginWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,39 +18,30 @@ class LoginWindow(QMainWindow):
         self.icon_path = "../resources/icon.png"
         self.username = None
         self.password = None
-
         self.initialize()
-
     def initialize(self):
         self.setWindowIcon(QtGui.QIcon(self.icon_path))
         self.setWindowTitle(self.title)
         self.setFixedSize(self.width, self.height)
         self.get_username()
         self.get_password()
-
         login_bt = QPushButton("Login", self)
         login_bt.move(340, 250)
         login_bt.clicked.connect(self.login)
-
         self.show()
-
     def get_username(self):
         username_label = QLabel(self)
         username_label.setText("Username: ")
         username_label.move(310, 170)
-
         self.username = QLineEdit(self)
         self.username.move(370, 170)
-
     def get_password(self):
         password_label = QLabel(self)
         password_label.setText("Password: ")
         password_label.move(310, 200)
-
         self.password = QLineEdit(self)
         self.password.setEchoMode(QLineEdit.Password)
         self.password.move(370, 200)
-
     def login(self):
         if not self.password.text() or not self.username.text():
             QMessageBox.about(self, "Error", "\nPlease fill all entries\t\n")
@@ -76,8 +63,6 @@ class LoginWindow(QMainWindow):
                 QMessageBox.about(
                     self, "Conenction Error", "\nDatabase is not running\t\n"
                 )
-
-
 app = QApplication(sys.argv)
 style = """
         QWidget{
